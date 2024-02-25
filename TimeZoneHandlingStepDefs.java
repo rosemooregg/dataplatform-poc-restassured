@@ -1,3 +1,5 @@
+import io.cucumber.java.Before;
+import io.cucumber.java.After;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -10,17 +12,36 @@ public class TimeZoneHandlingStepDefs {
     private String timestamp;
     private String transformedTimestamp;
 
-    @Given("the data is ingested with a timestamp")
-    public void ingestDataWithTimestamp() {
+    @Before
+    public void setUpData() {
+        // Set up test data before each scenario
         timestamp = "2024-02-28T12:00:00Z";
         // Assuming API endpoint for data ingestion
         given()
             .header("Content-Type", "application/json")
             .body("{ \"timestamp\": \"" + timestamp + "\" }")
         .when()
-            .post(BASE_URL + "/data-ingestion-endpoint")
+            .post(BASE_URL + "/setup-data-endpoint")
         .then()
             .statusCode(200);
+    }
+
+    @After
+    public void tearDownData() {
+        // Tear down test data after each scenario
+        // Assuming API endpoint for tearing down data
+        given()
+            .header("Content-Type", "application/json")
+            .body("{ \"timestamp\": \"" + timestamp + "\" }")
+        .when()
+            .post(BASE_URL + "/teardown-data-endpoint")
+        .then()
+            .statusCode(200);
+    }
+
+    @Given("the data is ingested with a timestamp")
+    public void ingestDataWithTimestamp() {
+        // No action needed here, as data is set up in @Before method
     }
 
     @When("the data is transformed")
