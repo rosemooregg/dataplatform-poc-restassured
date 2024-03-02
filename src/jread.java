@@ -8,8 +8,8 @@ import java.io.IOException;
 public class FileUtility {
 
     public static void main(String[] args) {
-        String inputFilePath = "path/to/your/input/files"; // Specify the directory path containing input files
-        String outputFilePath = "src/csv_files/output.csv"; // Specify the output CSV file path
+        String inputFilePath = /src/readfiles
+        String outputFilePath = "src/csv_files/output.csv"; /
 
         try {
             File outputFile = new File(outputFilePath);
