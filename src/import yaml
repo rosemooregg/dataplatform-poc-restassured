@@ -1,0 +1,11 @@
+import yaml
+
+# Define your data set as a Python dictionary
+data_set = {
+    'database1': ['table1', 'table2', 'table3'],
+    'database2': ['table1', 'table2']
+}
+
+# Open a file with write permission
+with open('data_set.yaml', 'w') as file:
+    documents = yaml.dump(data_set, file)
